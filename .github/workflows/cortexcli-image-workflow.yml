@@ -18,6 +18,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+        
     - name: Pull image and run code scan
       run: |
         IMAGE_NAME="${{ vars.IMAGE_DIST }}.traps.paloaltonetworks.com/cli-docker/${TOKEN}/method:amd64-latest"
