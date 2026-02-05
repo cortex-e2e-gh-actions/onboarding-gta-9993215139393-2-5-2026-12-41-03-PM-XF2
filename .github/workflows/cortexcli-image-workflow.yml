@@ -24,11 +24,12 @@ jobs:
 
         docker pull ${IMAGE_NAME}
         
+        echo "--- Listing Host Directory ---"
+        ls -la ${{ github.workspace }}
+        
+        echo "--- Listing Container Directory ---"
         docker run --rm \
-          --entrypoint sh
+          --entrypoint /bin/sh \
           --volume "${{ github.workspace }}:/workspace" \
-          --env CORTEX_API_BASE_URL="${CORTEX_API_BASE_URL}" \
-          --env CORTEX_API_KEY="${CORTEX_API_KEY}" \
-          --env CORTEX_API_KEY_ID="${CORTEX_API_KEY_ID}" \
           "$IMAGE_NAME" \
-          ls -l
+          -c "ls -la /workspace"
